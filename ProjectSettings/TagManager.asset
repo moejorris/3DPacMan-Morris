@@ -11,9 +11,9 @@ TagManager:
   - Maze
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
+  - Warp
+  - NoPellet
   - 
   - 
   - 
