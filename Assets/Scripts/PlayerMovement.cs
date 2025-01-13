@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float checkBoxSize = 0.4f;
     [SerializeField] LayerMask checkLayerMask;
     Vector3 vel;
+
+    // [SerializeField] float clydeRadius = 4;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -40,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(transform.position + nextDir, transform.localScale * (checkBoxSize * 2f));
         // Gizmos.DrawRay(transform.position, transform.right * 2f);
+
+        // Gizmos.color = Color.yellow;
+        // Gizmos.DrawWireSphere(transform.position, clydeRadius);
     }
 
 

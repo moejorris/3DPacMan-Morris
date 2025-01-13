@@ -4,7 +4,7 @@ public class PlayerAnimation : MonoBehaviour
 {
     Rigidbody rb;
     [SerializeField] Animator animator;
-    [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] ParticleSystem particleSys;
 
     void Awake()
     {
@@ -15,12 +15,12 @@ public class PlayerAnimation : MonoBehaviour
         if(rb.linearVelocity.magnitude < 1)
         {
             animator.speed = 0;
-            particleSystem.Stop();
+            particleSys.Stop();
         }
         else
         {
             animator.speed = 1;
-            particleSystem.Play();
+            particleSys.Play();
         }
     }
 }
