@@ -52,6 +52,8 @@ public class PelletSpawner : MonoBehaviour
             }
         }
         Debug.Log("There are " + pelletCount + "pellets in the scene");
+
+        if(GameManager.Instance == null) return;
         GameManager.Instance.pelletRequirement = pelletCount;
     }
 }

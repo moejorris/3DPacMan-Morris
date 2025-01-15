@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenuMorris.unity
+    guid: 98d406a073cb1bc42a5ff25adc61bdce
+  - enabled: 1
+    path: Assets/Scenes/HelpMorris.unity
+    guid: addf7dbb80148fc4397169fec7a59673
+  - enabled: 1
     path: Assets/Scenes/MazeMorris.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:

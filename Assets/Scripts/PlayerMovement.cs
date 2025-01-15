@@ -121,6 +121,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(other.GetComponent<Ghost>())
         {
+            if(!alive) return;
             alive = false;
             Debug.Log("Death!");
             GameManager.Instance.Death();

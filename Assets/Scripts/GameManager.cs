@@ -39,10 +39,26 @@ public class GameManager : MonoBehaviour
         pellets++;
         pelletText.text = "Pellets: " + pellets + "/" + pelletRequirement;
         //update Ui
+
+        if(pellets >= pelletRequirement)
+        {
+            GhostManager.instance.StopGame();
+            FindFirstObjectByType<PlayerMovement>().alive = false;
+
+
+            endPanel.SetActive(true);
+            winText.SetActive(true);
+
+            SoundManager.Instance.Invoke("PlayLevelRestart", 0.25f);
+        }
     }
 
     void Start()
     {
+        endPanel.SetActive(false);
+        winText.SetActive(false);
+        loseText.SetActive(false);
+
         pelletText.text = "Pellets: " + pellets + "/" + pelletRequirement;
         livesText.text = "Lives: " + lives;
 
@@ -76,6 +92,8 @@ public class GameManager : MonoBehaviour
         {
             //game over
             Debug.Log("no more lives");
+            endPanel.SetActive(true);
+            loseText.SetActive(true);
         }
         else
         {
