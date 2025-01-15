@@ -1,3 +1,11 @@
+//////////////////////////////////////////////
+//Assignment/Lab/Project: 3D Pac-Man Part 1
+//Name: Joe Morris
+//Section: SGD285.4173
+//Instructor: Ven Lewis
+//Date: 1/14/2025
+/////////////////////////////////////////////
+
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -12,26 +20,39 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float checkBoxSize = 0.4f;
     [SerializeField] LayerMask checkLayerMask;
     Vector3 vel;
-
-    // [SerializeField] float clydeRadius = 4;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    Vector3 startPos;
+    [HideInInspector] public bool alive = false;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        startPos = transform.position;
+        nextDir = Vector3.right;
+        Reset();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(!alive)
+        {
+            rb.linearVelocity = Vector3.zero;
+            return;
+        }
         InputCheck();
         UpdateIntendedDirection();
         CheckForWarp();
+        transform.forward = vel;
         rb.linearVelocity = vel * moveSpeed;
     }
 
     void Update()
     {
         AssignNewDirection();
+    }
+
+    void LateUpdate()
+    {
+        AnimCheck();
     }
 
     void OnDrawGizmos()
@@ -60,8 +81,18 @@ public class PlayerMovement : MonoBehaviour
         {
             nextDir = input.normalized;
         }
-        
+    }
 
+    void AnimCheck()
+    {
+        if(!Physics.Raycast(transform.position, vel, 0.6f, checkLayerMask) || !alive)
+        {
+            GetComponent<PlayerAnimation>().notMoving = false;
+        }
+        else
+        {
+            GetComponent<PlayerAnimation>().notMoving = true;
+        }
     }
 
     void AssignNewDirection()
@@ -72,7 +103,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("new dir assigned");
             vel = nextDir;
-            meshTransform.forward = nextDir;
             nextDir = Vector3.zero;
         }
     }
@@ -85,5 +115,24 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = new Vector3(-xPos, 0, 0.5f);
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<Ghost>())
+        {
+            alive = false;
+            Debug.Log("Death!");
+            GameManager.Instance.Death();
+        }
+    }
+
+    public void Reset()
+    {
+        alive = false;
+        transform.position = startPos;
+        transform.forward = Vector3.right;
+        nextDir = transform.forward;
+        vel = transform.forward;
     }
 }

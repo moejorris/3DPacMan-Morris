@@ -1,3 +1,11 @@
+//////////////////////////////////////////////
+//Assignment/Lab/Project: 3D Pac-Man Part 1
+//Name: Joe Morris
+//Section: SGD285.4173
+//Instructor: Ven Lewis
+//Date: 1/14/2025
+/////////////////////////////////////////////
+
 using UnityEngine;
 
 public class ViewManager : MonoBehaviour
@@ -7,8 +15,8 @@ public class ViewManager : MonoBehaviour
 
     void Start()
     {
-        cam3d.enabled = false;
-        cam2d.enabled = true;
+        cam3d.enabled = true;
+        cam2d.enabled = false;
     }
 
     void Update()
@@ -20,15 +28,7 @@ public class ViewManager : MonoBehaviour
     }
     void Toggle2D()
     {
-        if(cam2d.enabled)
-        {
-            cam2d.enabled = false;
-            cam3d.enabled = true;
-        }
-        else
-        {
-            cam3d.enabled = false;
-            cam2d.enabled = true;
-        }
+        cam2d.enabled = !cam2d.enabled;
+        cam3d.enabled = !cam3d.enabled;
     }
 }

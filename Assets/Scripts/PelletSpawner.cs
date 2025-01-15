@@ -1,3 +1,11 @@
+//////////////////////////////////////////////
+//Assignment/Lab/Project: 3D Pac-Man Part 1
+//Name: Joe Morris
+//Section: SGD285.4173
+//Instructor: Ven Lewis
+//Date: 1/14/2025
+/////////////////////////////////////////////
+
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -38,7 +46,7 @@ public class PelletSpawner : MonoBehaviour
                 
                 if(rayHit.collider.name == "Floor" && !Physics.CheckSphere(spawnPos, 0.3f))
                 {
-                    Instantiate(pelletPrefab, new Vector3(x, 0, z), Quaternion.identity);
+                    Instantiate(pelletPrefab, new Vector3(x, 0, z), Quaternion.identity).transform.parent = transform;
                     pelletCount++;
                 }
             }
